@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/setting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Settings"
+        android:textSize="25sp"
+        android:textColor="@android:color/black"
+        android:paddingBottom="16dp"
+        android:textStyle="bold"/>
+
+    <CheckBox
+        android:id="@+id/light_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable light Mode"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
+
+    <CheckBox
+        android:id="@+id/dark_mode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enable Dark Mode"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"/>
+
+</LinearLayout>
