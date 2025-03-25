@@ -1,58 +1,71 @@
 package com.example.uniapp;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
-import com.google.android.material.badge.BadgeDrawable;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationBarView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity {
+    EditText fname, user, email, password, repass;
+    Button reg;
+    DBHelper DB;
 
-    BottomNavigationView bottomNavigationView;
-    HomeFragment homeFragment = new HomeFragment();
-    NotificationFragment notificationFragment = new NotificationFragment();
-    SettingsFragment settingsFragment = new SettingsFragment();
-    ProfileFragment profileFragment = new ProfileFragment();
 
+
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNavigationView = findViewById(R.id.bottomnav);
-        BadgeDrawable badge = bottomNavigationView.getOrCreateBadge(R.id.notification);
-        badge.setVisible(true);  // Show the badge
-        badge.setNumber(5);      // Set a badge number (example: 5 notifications)
+//        login code
+        fname= findViewById(R.id.fname);
+        user= findViewById(R.id.user);
+        email= findViewById(R.id.email);
+        password= findViewById(R.id.password);
+        repass= findViewById(R.id.repass);
+        reg= findViewById(R.id.reg);
+        DB=new DBHelper(this);
 
-        // Default fragment
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
-
-        // Navigation item selection
-        bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+        reg.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                int itemid = menuItem.getItemId();
+            public void onClick(View view) {
+                String fullname = fname.getText().toString();
+                String name = user.getText().toString();
+                String emai = email.getText().toString();
+                String pass = password.getText().toString();
+                String re = repass.getText().toString();
 
-                if (itemid == R.id.home) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, homeFragment).commit();
-                    return true;  // Mark the event as handled
+                if (fullname.equals("") || name.equals("") || emai.equals("") || pass.equals("") || re.equals("")) {
+                    Toast.makeText(MainActivity.this, "Please Fill in all the Fields", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (pass.equals(re)) {
+                        Boolean checkusername = DB.checkusername(name);
+                        if (!checkusername) {
+                            Boolean insert = DB.insertdata(fullname, name, emai, pass);
+                            if (insert) {
+                                Toast.makeText(MainActivity.this, "USER REGISTRATION SUCCESS", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                                startActivity(intent);
+                                finish();
+                            } else {
+                                Toast.makeText(MainActivity.this, "SORRY REGISTRATION FAILED", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            Toast.makeText(MainActivity.this, "Username already exists", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(MainActivity.this, "Passwords do not match", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else if (itemid == R.id.notification) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, notificationFragment).commit();
-                    return true;  // Mark the event as handled
-                }
-                else if (itemid == R.id.settings) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, settingsFragment).commit();
-                    return true;  // Mark the event as handled
-                }
-                else if (itemid == R.id.profile) {
-                    getSupportFragmentManager().beginTransaction().replace(R.id.container, profileFragment).commit();
-                    return true;  // Mark the event as handled
-                }
-                return false;
             }
         });
+
+
     }
 }

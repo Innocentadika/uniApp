@@ -13,59 +13,60 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String DBNAME = "login.db";
 
     public DBHelper(Context context) {
-        super(context, "login.db", null, 1);
+        super(context, DBNAME, null, 1);
     }
 
     @Override
-    public void onCreate(SQLiteDatabase DBNAME) {
-        DBNAME.execSQL("create table users(username text, email text primary key, password text)");
-
+    public void onCreate(SQLiteDatabase db) {
+        db.execSQL("CREATE TABLE users(fullname TEXT, username TEXT, email TEXT PRIMARY KEY, password TEXT)");
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase DBNAME, int i, int i1) {
-        DBNAME.execSQL("drop table if exists users");
-
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS users");
+        onCreate(db);
     }
 
-    public boolean insertdata(String username, String email, String password) {
-        SQLiteDatabase DBNAME = this.getWritableDatabase();
+    public boolean insertdata(String fullname, String username, String email, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put("fullname", fullname);
         contentValues.put("username", username);
         contentValues.put("email", email);
         contentValues.put("password", password);
-        long result = DBNAME.insert("users", null, contentValues);
-        if (result == -1) return false;
-        else
-            return true;
+        long result = db.insert("users", null, contentValues);
+        return result != -1;
     }
 
     public boolean checkusername(String username) {
-        SQLiteDatabase DBNAME = this.getWritableDatabase();
-        Cursor cursor = DBNAME.rawQuery("select * from users where username =?", new String[] {username});
-        if (cursor.getCount() > 0)
-            return true;
-        else
-            return false;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE username =?", new String[]{username});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
     }
+
     public boolean checkemail(String email) {
-        SQLiteDatabase DBNAME = this.getWritableDatabase();
-        Cursor cursor = DBNAME.rawQuery("select * from users where email =?", new String[] {email});
-        if (cursor.getCount() > 0)
-            return true;
-        else
-            return false;
-
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE email =?", new String[]{email});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
     }
 
-    public boolean checkusernamepassword(String username, String password){
-        SQLiteDatabase DBNAME=this.getWritableDatabase();
-        Cursor cursor = DBNAME.rawQuery( "select * from users where username =? and password =?", new String[] {username, password});
-        if (cursor.getCount()>0)
-            return true;
-        else
-            return false;
+    public boolean checkname(String fullname) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE fullname =?", new String[]{fullname});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
     }
 
+    public boolean checkusernamepassword(String username, String password) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM users WHERE username =? AND password =?", new String[]{username, password});
+        boolean exists = cursor.getCount() > 0;
+        cursor.close();
+        return exists;
     }
-
+}
