@@ -150,7 +150,7 @@
                     android:textSize="23sp" />
 
                 <TextView
-                    android:id="@+id/login"
+                    android:id="@+id/loginr"
                     android:layout_width="180dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="false"
