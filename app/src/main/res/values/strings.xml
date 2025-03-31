@@ -7,4 +7,5 @@
     <string name="username">username</string>
     <string name="email_zetech_ac_ke">email@zetech.ac.ke</string>
     <string name="password">password</string>
+    <string name="sign_in">Sign In</string>
 </resources>
