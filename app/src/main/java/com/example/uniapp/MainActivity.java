@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -14,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     EditText fname, user, email, password, repass;
     Button reg;
     DBHelper DB;
+    TextView backward, loginr;
 
 
 
@@ -31,6 +33,26 @@ public class MainActivity extends AppCompatActivity {
         repass= findViewById(R.id.repass);
         reg= findViewById(R.id.reg);
         DB=new DBHelper(this);
+        backward = findViewById(R.id.backward);
+        loginr = findViewById(R.id.loginr);
+
+        backward.setOnClickListener( new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               Intent intent = new Intent(MainActivity.this, MainActivity.class);
+               startActivity(intent);
+               finish();
+        }
+        });
+
+        loginr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
