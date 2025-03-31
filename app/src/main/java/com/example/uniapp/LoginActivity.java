@@ -23,9 +23,8 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Initialize UI elements
-        user2 = findViewById(R.id.user2);
-        password2 = findViewById(R.id.password2);
+        user2 = findViewById(R.id.user);
+        password2 = findViewById(R.id.password);
         loginB = findViewById(R.id.loginB);
         DB = new DBHelper(this);
         backward = findViewById(R.id.backward);
@@ -35,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(intent);
-                finish(); // Close current activity
+                finish();
             }
         });
 
@@ -44,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String name = user2.getText().toString();
                 String pass = password2.getText().toString();
+
 
                 if (name.equals("") || pass.equals("")) {
                     Toast.makeText(LoginActivity.this, "Please Fill in all the Fields", Toast.LENGTH_SHORT).show();
