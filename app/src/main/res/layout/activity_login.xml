@@ -67,7 +67,7 @@ android:padding="10dp"
             android:paddingBottom="15dp" />
 
         <EditText
-            android:id="@+id/user2"
+            android:id="@+id/user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -78,7 +78,7 @@ android:padding="10dp"
             android:padding="10dp" />
 
         <EditText
-            android:id="@+id/password2"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
