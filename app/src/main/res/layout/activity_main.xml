@@ -8,37 +8,18 @@
     tools:context=".MainActivity"
     android:padding="4dp">
 
-    <TextView
-        android:id="@+id/backward"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:text="Go Back"
-        android:textColor="@android:color/black"
-        android:drawableLeft="@drawable/baseline_arrow_back_24"
-        android:drawablePadding="8dp"
-        android:layout_gravity="end"
-        android:layout_marginTop="20dp"
-        android:focusable="true"
-        android:clickable="true"
-        android:gravity="center_vertical"
-        android:drawableStart="@drawable/baseline_arrow_back_24"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:textSize="16sp"
-        android:ellipsize="end"
-        android:singleLine="true" />
 
     <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/crd1"
-        app:cardCornerRadius="40dp"
+        app:cardCornerRadius="10dp"
         app:cardMaxElevation="15dp"
         android:layout_centerInParent="true">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:paddingBottom="4dp">
 
@@ -133,10 +114,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="15dp">
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp">
 
                 <Button
-                    android:id="@+id/reg"
+                    android:id="@+id/login"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="false"
@@ -144,23 +126,24 @@
                     android:layout_marginTop="15dp"
                     android:background="@drawable/borderd"
                     android:padding="7dp"
-                    android:text="Register"
+                    android:text="Login"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="23sp" />
 
-                <TextView
-                    android:id="@+id/loginr"
-                    android:layout_width="180dp"
+                <Button
+                    android:id="@+id/register"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="false"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/borderd"
                     android:padding="7dp"
-                    android:text="Already have an account"
+                    android:text="Register"
                     android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="23sp" />
+                    android:textColor="@color/white"
+                    android:textSize="23sp"/>
 
             </LinearLayout>
 
